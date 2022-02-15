@@ -9,5 +9,5 @@ module BoutiqueTemwin {
 	requires java.desktop;
 	
 	opens application to javafx.graphics, javafx.fxml;
-	opens testuser to javafx.graphics, javafx.fxml;
+	opens application.testuser to javafx.graphics, javafx.fxml;
 }

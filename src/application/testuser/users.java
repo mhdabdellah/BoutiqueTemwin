@@ -1,4 +1,4 @@
-package testuser;
+package application.testuser;
 	
 	/**
 	 *
