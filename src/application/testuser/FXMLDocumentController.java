@@ -77,7 +77,7 @@ package application.testuser;
 	     
 	    public void Add_users (){    
 	        conn = mysqlconnect.ConnectDb();
-	        String sql = "insert into users (username,password,email,type)values(?,?,?,? )";
+	        String sql = "insert into utilisateur (username,password,email,type)values(?,?,?,? )";
 	        try {
 	            pst = conn.prepareStatement(sql);
 	            pst.setString(1, txt_username.getText());
@@ -103,7 +103,7 @@ package application.testuser;
 	    
 	        return;
 	    }
-//	    txt_id.setText(col_id.getCellData(index).toString());
+	    txt_id.setText(col_id.getCellData(index).toString());
 	    txt_username.setText(col_username.getCellData(index).toString());
 	    txt_password.setText(col_password.getCellData(index).toString());
 	    txt_email.setText(col_email.getCellData(index).toString());
@@ -111,7 +111,7 @@ package application.testuser;
 	    
 	    }
 
-	    public void Edit (){   
+	    public void Edit (){   //`username`, `password`, `email`, `type`
 	        try {
 	            conn = mysqlconnect.ConnectDb();
 	            String value1 = txt_id.getText();
@@ -119,8 +119,8 @@ package application.testuser;
 	            String value3 = txt_password.getText();
 	            String value4 = txt_email.getText();
 	            String value5 = txt_type.getText();
-	            String sql = "update users set user_id= '"+value1+"',username= '"+value2+"',password= '"+
-	                    value3+"',email= '"+value4+"',type= '"+value5+"' where user_id='"+value1+"' ";
+	            String sql = "update utilisateur set username= '"+value2+"',password= '"+
+	                    value3+"',email= '"+value4+"',type= '"+value5+"' where id='"+value1+"' ";
 	            pst= conn.prepareStatement(sql);
 	            pst.execute();
 	            JOptionPane.showMessageDialog(null, "Update");
@@ -134,7 +134,7 @@ package application.testuser;
 	    
 	    public void Delete(){
 	    conn = mysqlconnect.ConnectDb();
-	    String sql = "delete from users where user_id = ?";
+	    String sql = "delete from utilisateur where id = ?";
 	        try {
 	            pst = conn.prepareStatement(sql);
 	            pst.setString(1, txt_id.getText());
