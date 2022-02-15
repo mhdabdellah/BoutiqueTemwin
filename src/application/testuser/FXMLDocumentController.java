@@ -103,7 +103,7 @@ package application.testuser;
 	    
 	        return;
 	    }
-	    txt_id.setText(col_id.getCellData(index).toString());
+//	    txt_id.setText(col_id.getCellData(index).toString());
 	    txt_username.setText(col_username.getCellData(index).toString());
 	    txt_password.setText(col_password.getCellData(index).toString());
 	    txt_email.setText(col_email.getCellData(index).toString());
