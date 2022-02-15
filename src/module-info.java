@@ -1,0 +1,13 @@
+module BoutiqueTemwin {
+	requires javafx.controls;
+	requires java.sql.rowset;
+	requires java.base;
+	requires java.management;
+	requires javafx.fxml;
+	requires javafx.graphics;
+	requires javafx.base;
+	requires java.desktop;
+	
+	opens application to javafx.graphics, javafx.fxml;
+	opens testuser to javafx.graphics, javafx.fxml;
+}
