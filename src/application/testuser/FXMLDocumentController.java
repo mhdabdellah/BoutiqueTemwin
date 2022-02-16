@@ -1,29 +1,44 @@
 package application.testuser;
 
-	import java.net.URL;
+	import java.io.IOException;
+import java.net.URL;
 	import java.sql.Connection;
 	import java.sql.PreparedStatement;
 	import java.sql.ResultSet;
 	import java.util.ResourceBundle;
-	import javafx.collections.FXCollections;
+//	import javafx.collections.FXCollections;
 	import javafx.collections.ObservableList;
 	import javafx.collections.transformation.FilteredList;
 	import javafx.collections.transformation.SortedList;
-	import javafx.fxml.FXML;
-	import javafx.fxml.Initializable;
-	import javafx.scene.control.TableColumn;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 	import javafx.scene.control.TableView;
 	import javafx.scene.control.TextField;
-	import javafx.scene.control.cell.PropertyValueFactory;
-	import javafx.scene.input.KeyEvent;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+//	import javafx.scene.input.KeyEvent;
 	import javafx.scene.input.MouseEvent;
-	import javax.swing.JOptionPane;
+import javafx.stage.Stage;
+
+//import javax.swing.JOptionPane;
 
 	/**
 	 *
 	 * @author amir
 	 */
 	public class FXMLDocumentController implements Initializable {
+		
+		private Stage stage;
+		private Scene scene;
+		private Parent root;
 	    
 
 	    @FXML
@@ -62,6 +77,26 @@ package application.testuser;
 	    @FXML
 	    private TextField filterField;
 	    
+	    public void clearFields() {
+	    	txt_username.setText(null);
+	    	txt_password.setText(null);
+	    	txt_email.setText(null);
+	    	txt_type.setText(null);
+			txt_id.setText(null);
+		 }
+	    
+	    @FXML
+	    private Button back;
+	    
+	    @FXML
+	    private void rBack(ActionEvent event) throws IOException {///BoutiqueTemwin/src/application/Dashboard.fxml
+	    	root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+	    	
+	    }
 	       
 	    ObservableList<users> listM;
 	    ObservableList<users> dataList;
@@ -86,11 +121,15 @@ package application.testuser;
 	            pst.setString(4, txt_type.getText());
 	            pst.execute();
 	            
-	            JOptionPane.showMessageDialog(null, "Users Add succes");
+//	            JOptionPane.showMessageDialog(null, "Users Add succes");
 	            UpdateTable();
 	            search_user();
+	            clearFields();
+	            infoBox("L'utilisateur est bien Ajouté","Success",null);
+	            
 	        } catch (Exception e) {
-	            JOptionPane.showMessageDialog(null, e);
+//	            JOptionPane.showMessageDialog(null, e);
+	        	infoBox("L'utilisateur n'est pas Ajouté par ce que  "+e,"Failed",null);
 	        }
 	    }
 	    
@@ -123,11 +162,15 @@ package application.testuser;
 	                    value3+"',email= '"+value4+"',type= '"+value5+"' where id='"+value1+"' ";
 	            pst= conn.prepareStatement(sql);
 	            pst.execute();
-	            JOptionPane.showMessageDialog(null, "Update");
+//	            JOptionPane.showMessageDialog(null, "Update");
 	            UpdateTable();
 	            search_user();
+	            clearFields();
+	            infoBox("L'utilisateur est bien Modifié","Success",null);
+	            
 	        } catch (Exception e) {
-	            JOptionPane.showMessageDialog(null, e);
+//	            JOptionPane.showMessageDialog(null, e);
+	        	infoBox("L'utilisateur n'est pas Modifié par ce que  "+e,"Failed",null);
 	        }
 	        
 	    }
@@ -139,11 +182,14 @@ package application.testuser;
 	            pst = conn.prepareStatement(sql);
 	            pst.setString(1, txt_id.getText());
 	            pst.execute();
-	            JOptionPane.showMessageDialog(null, "Delete");
+//	            JOptionPane.showMessageDialog(null, "Delete");
+	            infoBox("L'utilisateur est bien Supprimé","Success",null);
 	            UpdateTable();
 	            search_user();
+	            clearFields();
 	        } catch (Exception e) {
-	            JOptionPane.showMessageDialog(null, e);
+//	            JOptionPane.showMessageDialog(null, e);
+	        	infoBox("L'utilisateur n'est pas Supprimé par ce que  "+e,"Failed",null);
 	        }
 	    
 	    }
@@ -200,6 +246,15 @@ package application.testuser;
 	  table_users.setItems(sortedData);      
 	    }
 	    
+	 
+	 private static void infoBox(String infoMessage, String titleBar, String headerMessage) {
+			// TODO Auto-generated method stub
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle(titleBar);
+			alert.setHeaderText(headerMessage);
+			alert.setContentText(infoMessage);
+			alert.showAndWait();
+		}
 	    @Override
 	    public void initialize(URL url, ResourceBundle rb) {
 	    UpdateTable();

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.produit.FXMLDocumentController">
+   <children>
+      <AnchorPane layoutY="6.0" prefHeight="550.0" prefWidth="204.0" style="-fx-background-color: #28252e;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="17.0" layoutY="394.0" mnemonicParsing="false" onAction="#Add_users" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: green;" text="Add" />
+            <Button layoutX="18.0" layoutY="441.0" mnemonicParsing="false" onAction="#Edit" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: Orange;" text="Update" />
+            <Button layoutX="18.0" layoutY="489.0" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: red;" text="Delete" />
+            <TextField fx:id="txt_code_produit" layoutX="24.0" layoutY="60.0" onKeyReleased="#search_user" prefHeight="30.0" prefWidth="180.0" promptText="code_produit" />
+            <TextField fx:id="txt_deseignation" layoutX="24.0" layoutY="110.0" prefHeight="30.0" prefWidth="180.0" promptText="deseignation" />
+            <TextField fx:id="txt_quantite_pour_client" layoutX="24.0" layoutY="159.0" prefHeight="30.0" prefWidth="180.0" promptText="quantite_pour_client" />
+            <TextField fx:id="txt_fournisseur" layoutX="24.0" layoutY="207.0" prefHeight="30.0" prefWidth="180.0" promptText="fournisseur" />
+            <TextField fx:id="txt_id" layoutX="24.0" layoutY="21.0" prefHeight="23.0" prefWidth="180.0" promptText="ID" />
+            <TextField fx:id="txt_remise" layoutX="26.0" layoutY="250.0" prefHeight="30.0" prefWidth="180.0" promptText="remise" />
+            <TextField fx:id="txt_prix" layoutX="25.0" layoutY="291.0" prefHeight="30.0" prefWidth="180.0" promptText="prix" />
+            <TextField fx:id="txt_quantite" layoutX="24.0" layoutY="335.0" prefHeight="30.0" prefWidth="180.0" promptText="quantite" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="table_produits" layoutX="208.0" layoutY="76.0" onMouseClicked="#getSelected" prefHeight="474.0" prefWidth="581.0">
+        <columns>
+          <TableColumn fx:id="col_id" prefWidth="38.0" text="ID" />
+          <TableColumn fx:id="col_code_produit" prefWidth="79.0" text="CodeProduit" />
+            <TableColumn fx:id="col_deseignation" prefWidth="77.0" text="Nom Produit" />
+            <TableColumn fx:id="col_quantite_pour_client" prefWidth="84.0" text="(Kg)/(l)client" />
+            <TableColumn fx:id="col_fournisseur" prefWidth="76.0" text="Fournisseur" />
+            <TableColumn fx:id="col_remise" prefWidth="75.0" text="Remise(%)" />
+            <TableColumn fx:id="col_prix" prefWidth="68.0" text="Prix(UM)" />
+            <TableColumn fx:id="col_quantite" prefWidth="76.0" text="Qantite(Kg)" />
+        </columns>
+      </TableView>
+      <TextField fx:id="filterField" layoutX="424.0" layoutY="27.0" prefHeight="30.0" prefWidth="149.0" promptText="Search" />
+      <Button fx:id="back" layoutX="626.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" onAction="#rBack" text="Dashboard Boutique Temwin" />
+   </children>
+</AnchorPane>
