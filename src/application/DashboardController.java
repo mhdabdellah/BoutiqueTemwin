@@ -46,7 +46,7 @@ public class DashboardController implements Initializable{
 	    @FXML
 		private void manageproduits(ActionEvent event) throws IOException{
 	    	infoBox("Affichage de la list des Produits","Success",null);
-	    	root = FXMLLoader.load(getClass().getResource("produit/FXMLDocument.fxml"));
+	    	root = FXMLLoader.load(getClass().getResource("produitDocument.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
