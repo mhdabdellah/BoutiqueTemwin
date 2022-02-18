@@ -20,7 +20,7 @@ public class Main extends Application {
 //			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 //			primaryStage.setScene(scene);
 //			primaryStage.show();
-			Parent root = FXMLLoader.load(getClass().getResource("testuser/FXMLDocument.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setTitle("Enregistrer Nouvelle Utilisateur");
