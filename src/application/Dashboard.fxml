@@ -14,7 +14,7 @@
       </Label>
       <Button fx:id="manageUsers" layoutX="36.0" layoutY="99.0" mnemonicParsing="false" onAction="#manageusers" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Utilisateurs" />
       <Button fx:id="manageProduits" layoutX="223.0" layoutY="99.0" mnemonicParsing="false" onAction="#manageproduits" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Produits" />
-      <Button layoutX="412.0" layoutY="99.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Button" />
+      <Button layoutX="412.0" layoutY="99.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" onAction="#manageclients" style="-fx-background-color: #E6E6FA;" text="Gestion des Clients" />
       <Button fx:id="logout" layoutX="540.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: #E6E6FA;" text="Logout" />
    </children>
 </AnchorPane>

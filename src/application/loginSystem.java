@@ -46,7 +46,7 @@ public class loginSystem implements Initializable{
 	
 	
 	@FXML
-	private void login(ActionEvent event){
+	private void login(ActionEvent event){// paresInteger(loginNameOrEmail.getText(
 		String nameOrEmail = loginNameOrEmail.getText().toString();
 		String password = loginPassword.getText().toString();
 		
