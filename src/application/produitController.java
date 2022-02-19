@@ -3,8 +3,10 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import application.produit.mysqlconnect;
@@ -125,19 +127,36 @@ public class produitController implements Initializable {
     PreparedStatement pst = null;
     
      
-    public void Add_users (){    
+    public void Add_users (){
+    	String code =txt_code_produit.getText().toString();
+        String nom = txt_deseignation.getText().toString();
+        int qclient = Integer.parseInt(txt_quantite_pour_client.getText().toString());
+        String fr = txt_fournisseur.getText().toString();
+        int rm = Integer.parseInt(txt_remise.getText().toString());
+        int pr = Integer.parseInt(txt_prix.getText().toString());
+        int qn = Integer.parseInt(txt_quantite.getText().toString());
         conn = mysqlconnect.ConnectDb();
-        String sql = "insert into utilisateur (code_produit,deseignation,quantite_pour_client,fournisseur,remise,prix,quantite)values(?,?,?,?,?,?,? )";
+        String sql = "INSERT INTO produit VALUES (null,'"+code+"','"+nom+"','"+qclient+"','"+fr+"','"+rm+"','"+pr+"','"+qn+"');";
         try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, txt_code_produit.getText());
-            pst.setString(2, txt_deseignation.getText());
-            pst.setString(3, txt_quantite_pour_client.getText());
-            pst.setString(4, txt_fournisseur.getText());
-            pst.setString(5, txt_remise.getText());
-            pst.setString(6, txt_prix.getText());
-            pst.setString(7, txt_quantite.getText());
-            pst.execute();
+        	/*
+        	 * Connection con =DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+			Statement st = con.createStatement();
+			if (password.contentEquals(confirmPassword)) {
+				String sql= "INSERT INTO `utilisateur`(`id`, `username`, `password`, `email`, `type`) VALUES (null,'"+nom+"','"+password+"','"+email+"','"+etat+"');";
+//				st.executeUpdate(sql);
+				
+        	 * */
+        	Statement st = conn.createStatement();
+        	st.executeUpdate(sql);
+//            pst = conn.prepareStatement(sql);
+//            pst.setString(1, txt_code_produit.getText());
+//            pst.setString(2, txt_deseignation.getText());
+//            pst.setString(3, txt_quantite_pour_client.getText());
+//            pst.setString(4, txt_fournisseur.getText());
+//            pst.setString(5, txt_remise.getText());
+//            pst.setString(6, txt_prix.getText());
+//            pst.setString(7, txt_quantite.getText());
+//            pst.execute();
             
 //            JOptionPane.showMessageDialog(null, "Produits  Add succes");
             infoBox("La produit est bien Ajouté","Success",null);
@@ -193,7 +212,7 @@ public class produitController implements Initializable {
             
             //code_produit,deseignation,quantite_pour_client,fournisseur,remise,prix,quantite
             
-            String sql = "update utilisateur set code_produit= '"+value2+"',deseignation= '"+
+            String sql = "update produit set code_produit= '"+value2+"',deseignation= '"+
                     value3+"',quantite_pour_client= '"+value4+"',fournisseur= '"+value5+"',remise= '"+value6+"',prix= '"+value7+"',quantite= '"+value8+"' where id='"+value1+"' ";
             pst= conn.prepareStatement(sql);
             pst.execute();

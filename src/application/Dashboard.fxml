@@ -12,9 +12,9 @@
             <Font size="41.0" />
          </font>
       </Label>
-      <Button fx:id="manageUsers" layoutX="42.0" layoutY="99.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="264.0" onAction="#manageusers" text="Gestion des Utilisateurs" />
-      <Button fx:id="manageProduits" layoutX="42.0" layoutY="156.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="264.0" onAction="#manageproduits" text="Gestion des Produits" />
-      <Button layoutX="42.0" layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="258.0" text="Button" />
-      <Button fx:id="logout" layoutX="540.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+      <Button fx:id="manageUsers" layoutX="36.0" layoutY="99.0" mnemonicParsing="false" onAction="#manageusers" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Utilisateurs" />
+      <Button fx:id="manageProduits" layoutX="223.0" layoutY="99.0" mnemonicParsing="false" onAction="#manageproduits" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Produits" />
+      <Button layoutX="412.0" layoutY="99.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Button" />
+      <Button fx:id="logout" layoutX="540.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: #E6E6FA;" text="Logout" />
    </children>
 </AnchorPane>
