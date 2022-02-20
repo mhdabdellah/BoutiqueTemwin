@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 16 fév. 2022 à 13:22
+-- Généré le : dim. 20 fév. 2022 à 21:51
 -- Version du serveur : 10.4.19-MariaDB
 -- Version de PHP : 7.4.20
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `boutique_temwin`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `client`
+--
+
+CREATE TABLE `client` (
+  `id` int(11) NOT NULL,
+  `username` varchar(250) NOT NULL,
+  `lastname` varchar(250) NOT NULL,
+  `nni` varchar(250) NOT NULL,
+  `qrcode` int(11) NOT NULL,
+  `idvendeur` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `client`
+--
+
+INSERT INTO `client` (`id`, `username`, `lastname`, `nni`, `qrcode`, `idvendeur`) VALUES
+(1, 'mohamed', 'sidi', '55484654778', 54458888, 1),
+(2, 'sidi', 'mahmoud', '58878545', 554787845, 5);
 
 -- --------------------------------------------------------
 
@@ -43,7 +66,8 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `code_produit`, `deseignation`, `quantite_pour_client`, `fournisseur`, `remise`, `prix`, `quantite`) VALUES
-(7, '2252512', 'ris', 2, 'alibaba', 22, 254, 999);
+(1, '4458', 'deluire', 55, 'alibaba', 47, 58, 9998),
+(2, '2252512', 'ris', 2, 'alibaba', 22, 254, 999);
 
 -- --------------------------------------------------------
 
@@ -73,15 +97,45 @@ INSERT INTO `utilisateur` (`id`, `username`, `password`, `email`, `type`) VALUES
 (10, 'ahmed', '1234', 'ahmed@gmail.com', 'magasinier'),
 (12, 'Anjnjmn', 'sidi1212', 'abdellahi@gmail.com', 'admin');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ventes`
+--
+
+CREATE TABLE `ventes` (
+  `id` int(11) NOT NULL,
+  `idclient` int(11) NOT NULL,
+  `idvendeur` int(11) NOT NULL,
+  `quantite_vendues` int(11) NOT NULL,
+  `produit` varchar(250) NOT NULL,
+  `datevente` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `ventes`
+--
+
+INSERT INTO `ventes` (`id`, `idclient`, `idvendeur`, `quantite_vendues`, `produit`, `datevente`) VALUES
+(2, 2, 1, 56, 'deluire', '22/02/2220'),
+(3, 2, 8, 25, 'rise', '22/2/2221');
+
 --
 -- Index pour les tables déchargées
 --
 
 --
+-- Index pour la table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`id`,`nni`),
+  ADD KEY `idvendeur` (`idvendeur`);
+
+--
 -- Index pour la table `produit`
 --
 ALTER TABLE `produit`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`,`deseignation`);
 
 --
 -- Index pour la table `utilisateur`
@@ -90,20 +144,57 @@ ALTER TABLE `utilisateur`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `ventes`
+--
+ALTER TABLE `ventes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idclient` (`idclient`),
+  ADD KEY `idvendeur` (`idvendeur`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `client`
+--
+ALTER TABLE `client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT pour la table `ventes`
+--
+ALTER TABLE `ventes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `client`
+--
+ALTER TABLE `client`
+  ADD CONSTRAINT `client_ibfk_1` FOREIGN KEY (`idvendeur`) REFERENCES `utilisateur` (`id`);
+
+--
+-- Contraintes pour la table `ventes`
+--
+ALTER TABLE `ventes`
+  ADD CONSTRAINT `ventes_ibfk_1` FOREIGN KEY (`idclient`) REFERENCES `client` (`id`),
+  ADD CONSTRAINT `ventes_ibfk_2` FOREIGN KEY (`idvendeur`) REFERENCES `utilisateur` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
