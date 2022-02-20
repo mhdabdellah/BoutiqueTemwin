@@ -1,4 +1,4 @@
-package application.testuser;
+package application.vente;
 
 	
 	
@@ -32,15 +32,15 @@ import javax.swing.JOptionPane;
 	    
 	    }
 	    
-	    public static ObservableList<users> getDatausers(){
+	    public static ObservableList<vente> getDatausers(){
 	        Connection conn = ConnectDb();
-	        ObservableList<users> list = FXCollections.observableArrayList();
+	        ObservableList<vente> list = FXCollections.observableArrayList();
 	        try {
-	            PreparedStatement ps = conn.prepareStatement("select * from utilisateur");
+	            PreparedStatement ps = conn.prepareStatement("select * from ventes");
 	            ResultSet rs = ps.executeQuery();
 	            
 	            while (rs.next()){   
-	                list.add(new users(Integer.parseInt(rs.getString("id")), rs.getString("username"), rs.getString("password"), rs.getString("email"), rs.getString("type")));               
+	                list.add(new vente(Integer.parseInt(rs.getString("id").toString()), Integer.parseInt(rs.getString("idclient").toString()), Integer.parseInt(rs.getString("quantite_vendues").toString()),Integer.parseInt( rs.getString("idvendeur").toString()), rs.getString("datevente").toString(),rs.getString("produit").toString()));               
 	            }
 	        } catch (Exception e) {
 	        }

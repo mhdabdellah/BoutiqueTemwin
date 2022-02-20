@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import application.client.mysqlconnect;
-import application.client.users;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -16,6 +15,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,7 +30,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import application.client.*;
 
@@ -86,6 +92,41 @@ public class ClientController implements Initializable{
     	txt_qrcode.setText(null);
 		txt_id.setText(null);
 	 }
+    @FXML
+    private AnchorPane carte;
+    
+    @FXML
+    private TextField cartnom;
+    
+    @FXML
+    private TextField cartprenom;
+    
+    @FXML
+    private TextField cartnni;
+    
+    @FXML
+    private TextField cartqrcode;
+    
+    @FXML
+    private ImageView cartimage;
+    
+    @FXML
+    private void imprimer(ActionEvent event) {
+    	Printer printer = Printer.getDefaultPrinter();
+    	PageLayout pageLayout = printer.createPageLayout(Paper.A4,PageOrientation.PORTRAIT,Printer.MarginType.DEFAULT);
+    	PrinterJob job= PrinterJob.createPrinterJob();
+    	if(job!= null) {
+    		boolean success = job.printPage(carte);
+    		if(success) {
+    			job.endJob();
+    		}
+    	}
+    }
+    
+    @FXML
+    private void generer(ActionEvent event) {
+    	
+    }
     
     @FXML
     private Button back;
@@ -151,6 +192,10 @@ public class ClientController implements Initializable{
     txt_nni.setText(col_nni.getCellData(index).toString());
     txt_qrcode.setText(col_qrcode.getCellData(index).toString());
     txt_idvendeur.setText(col_idvendeur.getCellData(index).toString());
+    cartnom.setText(col_username.getCellData(index).toString());
+    cartprenom.setText(col_lastname.getCellData(index).toString());
+    cartnni.setText(col_nni.getCellData(index).toString());
+    cartqrcode.setText(col_qrcode.getCellData(index).toString());
     
     }
 

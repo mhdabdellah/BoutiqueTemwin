@@ -12,9 +12,23 @@
             <Font size="41.0" />
          </font>
       </Label>
-      <Button fx:id="manageUsers" layoutX="36.0" layoutY="99.0" mnemonicParsing="false" onAction="#manageusers" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Utilisateurs" />
-      <Button fx:id="manageProduits" layoutX="223.0" layoutY="99.0" mnemonicParsing="false" onAction="#manageproduits" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Produits" />
-      <Button layoutX="412.0" layoutY="99.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" onAction="#manageclients" style="-fx-background-color: #E6E6FA;" text="Gestion des Clients" />
+      <Button fx:id="manageUsers" layoutX="60.0" layoutY="98.0" mnemonicParsing="false" onAction="#manageusers" prefHeight="90.0" prefWidth="200.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Utilisateurs">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="manageProduits" layoutX="326.0" layoutY="98.0" mnemonicParsing="false" onAction="#manageproduits" prefHeight="90.0" prefWidth="200.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Produits">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button layoutX="323.0" layoutY="212.0" mnemonicParsing="false" onAction="#manageclients" prefHeight="90.0" prefWidth="200.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Clients">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
       <Button fx:id="logout" layoutX="540.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: #E6E6FA;" text="Logout" />
+      <Button  layoutX="60.0" layoutY="216.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="200.0" style="-fx-background-color: #E6E6FA;" onAction="#manageclient" text="Gestion des Ventes">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

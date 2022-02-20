@@ -33,8 +33,17 @@ public class DashboardController implements Initializable{
 	    private Button logout;
 	    
 	    @FXML
+	    private void manageclient(ActionEvent event) throws IOException {
+	    	root = FXMLLoader.load(getClass().getResource("venteDocument.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+	    }
+	    
+	    @FXML
 	    private void manageclients(ActionEvent event) throws IOException {
-	    	infoBox("Affichage de la list des Utilisateurs","Success",null);
+//	    	infoBox("Affichage de la list des Utilisateurs","Success",null);
 	    	root = FXMLLoader.load(getClass().getResource("clientDocument.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
@@ -45,7 +54,7 @@ public class DashboardController implements Initializable{
 	    
 	    @FXML
 		private void manageusers(ActionEvent event) throws IOException{
-	    	infoBox("Affichage de la list des Utilisateurs","Success",null);
+//	    	infoBox("Affichage de la list des Utilisateurs","Success",null);
 	    	root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
@@ -56,7 +65,7 @@ public class DashboardController implements Initializable{
 	    
 	    @FXML
 		private void manageproduits(ActionEvent event) throws IOException{
-	    	infoBox("Affichage de la list des Produits","Success",null);
+//	    	infoBox("Affichage de la list des Produits","Success",null);
 	    	root = FXMLLoader.load(getClass().getResource("produitDocument.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
