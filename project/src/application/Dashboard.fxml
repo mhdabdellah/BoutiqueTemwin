@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.59" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DashboardController">
+   <children>
+      <Label layoutX="4.0" layoutY="7.0" prefHeight="59.0" prefWidth="525.0" text="DashBoard Boutique Temwin" textFill="#380606">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </Label>
+      <Button fx:id="manageUsers" layoutX="36.0" layoutY="99.0" mnemonicParsing="false" onAction="#manageusers" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Utilisateurs" />
+      <Button fx:id="manageProduits" layoutX="223.0" layoutY="99.0" mnemonicParsing="false" onAction="#manageproduits" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Gestion des Produits" />
+      <Button layoutX="412.0" layoutY="99.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="155.0" style="-fx-background-color: #E6E6FA;" text="Button" />
+      <Button fx:id="logout" layoutX="540.0" layoutY="14.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: #E6E6FA;" text="Logout" />
+   </children>
+</AnchorPane>
