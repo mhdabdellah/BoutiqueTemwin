@@ -7,10 +7,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+
+//-------------------------------------
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+//-------------------------------------
+import java.io.Console;
+import java.io.File;
+import java.io.FileOutputStream;
+
 import application.client.mysqlconnect;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +56,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import application.client.*;
+
 
 public class ClientController implements Initializable{
 	
@@ -157,23 +179,28 @@ public class ClientController implements Initializable{
         conn = mysqlconnect.ConnectDb();
         String sql = "insert into client(username,lastname,nni,qrcode,idvendeur) values(?,?,?,?,? )";
         try {
+        	ByteArrayOutputStream out = QRCode.from(txt_nni.getText()).to(ImageType.PNG).withSize(200, 200).stream();
+        	File f = new File("C:\\javafx-sdk\\mysqlConnector\\"+txt_nni.getText()+".png");
+        	FileOutputStream fos = new FileOutputStream(f);
+        	fos.write(out.toByteArray());
+        	fos.flush();
             pst = conn.prepareStatement(sql);
             pst.setString(1, txt_username.getText());
             pst.setString(2, txt_lastname.getText());
             pst.setString(3, txt_nni.getText());
-            pst.setString(4, txt_qrcode.getText());
+            pst.setString(4, txt_nni.getText());
             pst.setString(5, txt_idvendeur.getText());
             pst.execute();
-            
+
 //            JOptionPane.showMessageDialog(null, "Users Add succes");
             UpdateTable();
             search_user();
             clearFields();
-            infoBox("Le client est bien Ajouté","Success",null);
+            infoBox("Le client est bien jhjh Ajouté","Success",null);
             
         } catch (Exception e) {
 //            JOptionPane.showMessageDialog(null, e);
-        	infoBox("Le client n'est pas Ajouté par ce que  "+e,"Failed",null);
+        	infoBox("Le client n'est pas Ajouté par ce  que  "+e,"Failed",null);
         }
     }
     
