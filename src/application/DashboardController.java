@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +30,9 @@ public class DashboardController implements Initializable{
 	    private Button manageUsers;
 	    @FXML
 	    private Button manageProduits;
+	    @FXML
+	    private Button manageBoutiques;
+	    
 	    @FXML
 	    private Button logout;
 	    
@@ -72,7 +76,25 @@ public class DashboardController implements Initializable{
 			stage.setScene(scene);
 			stage.show();
 	    }
-	    
+	    @FXML
+		private void manageboutiques(ActionEvent event) throws IOException{
+//	    	infoBox("Affichage de la list des Produits","Success",null);
+	    	try {
+	    		
+	    	URL uri = new File("src/application/boutique/BoutiqueView.fxml").toURI().toURL();
+	    	root = FXMLLoader.load(uri);
+//	    	getClass().getResource("/BoutiqueTemwin/src/application/boutique/BoutiqueView.fxml")
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+	    	}catch(Exception e) {
+	    		
+	    		infoBox(" "+e,"Success",null);
+	    		
+	    	}
+	    	
+	    }
 	    @FXML
 		private void Logout(ActionEvent event) throws IOException{
 	    	infoBox("Logout de Notre System","Success",null);
