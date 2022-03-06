@@ -80,8 +80,18 @@ public class loginSystem implements Initializable{
 				
 			}else if(rs2.next()) {
 				infoBox("L'utilisateur "+nameOrEmail+" est bien Identifie Comme Magasinier","Success",null);
+				root = FXMLLoader.load(getClass().getResource("DashboardMagasinier.fxml"));
+				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				scene = new Scene(root);
+				stage.setScene(scene);
+				stage.show();
 			}else if(rs3.next()) {
 				infoBox("L'utilisateur "+nameOrEmail+" est bien Identifie Comme Vendeur","Success",null);
+				root = FXMLLoader.load(getClass().getResource("DashboardBoutique.fxml"));
+				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				scene = new Scene(root);
+				stage.setScene(scene);
+				stage.show();
 			}else{
 				infoBox("l'email ou la mots de passe il est incorrecte","Failed",null);
 			}
