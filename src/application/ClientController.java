@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 
 //-------------------------------------
 import javafx.application.Application;
@@ -177,7 +177,7 @@ public class ClientController implements Initializable{
      
     public void Add_users (){    
         conn = mysqlconnect.ConnectDb();
-        String sql = "insert into client(username,lastname,nni,qrcode,idvendeur) values(?,?,?,?,? )";
+        String sql = "insert into client(username,lastname,nni,qrcode,idvendeur) values(?,?,?,?,?)";
         try {
         	ByteArrayOutputStream out = QRCode.from(txt_nni.getText()).to(ImageType.PNG).withSize(200, 200).stream();
         	File f = new File("C:\\javafx-sdk\\mysqlConnector\\"+txt_nni.getText()+".png");
@@ -196,7 +196,7 @@ public class ClientController implements Initializable{
             UpdateTable();
             search_user();
             clearFields();
-            infoBox("Le client est bien jhjh Ajouté","Success",null);
+            infoBox("Le client est bien Ajouté","Success",null);
             
         } catch (Exception e) {
 //            JOptionPane.showMessageDialog(null, e);

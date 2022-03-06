@@ -1,0 +1,9 @@
+package application.boutique
+
+import javafx.scene.layout.AnchorPane
+
+component BoutiqueView {
+	AnchorPane {
+		//TODO Add Nodes
+	}
+}
