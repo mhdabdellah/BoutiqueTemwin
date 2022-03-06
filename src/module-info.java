@@ -16,4 +16,5 @@ module BoutiqueTemwin {
 	opens application.client to javafx.graphics, javafx.fxml,javafx.base;
 	opens application.vente to javafx.graphics, javafx.fxml,javafx.base;
 	opens application.boutique to javafx.graphics, javafx.fxml,javafx.base;
+	opens application.megazin to javafx.graphics, javafx.fxml;
 }

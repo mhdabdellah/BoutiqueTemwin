@@ -70,7 +70,7 @@ public class DashboardController implements Initializable{
 	    }
 	    @FXML
 		private void magazin(ActionEvent event) throws IOException{
-//	    	infoBox("Affichage de la list des Utilisateurs","Success",null);
+//	    	infoBox("Affichage de la list des Utilisateurs","Success",null);magazinDocument.fxml
 	    	root = FXMLLoader.load(getClass().getResource("magazinDocument.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);

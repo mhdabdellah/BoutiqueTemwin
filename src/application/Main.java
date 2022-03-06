@@ -19,8 +19,8 @@ public class Main extends Application {
 //			Scene scene = new Scene(root,400,400);
 //			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 //			primaryStage.setScene(scene);
-//			primaryStage.show();
-			Parent root = FXMLLoader.load(getClass().getResource("venteDocument.fxml"));
+//			primaryStage.show();/BoutiqueTemwin/src/application/magazinDocument.fxml
+			Parent root = FXMLLoader.load(getClass().getResource("magazinDocument.fxml"));
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setTitle("Enregistrer Nouvelle Utilisateur");

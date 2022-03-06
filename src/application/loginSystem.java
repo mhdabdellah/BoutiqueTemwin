@@ -56,8 +56,14 @@ public class loginSystem implements Initializable{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con =DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 			Statement st = con.createStatement();
-			String sql= "SELECT * FROM `utilisateur` WHERE (username= '"+nameOrEmail+"' and password = '"+password+"') or (email= '"+nameOrEmail+"' and password = '"+password+"') ;";
+			String sql= "SELECT * FROM `utilisateur` WHERE (username= '"+nameOrEmail+"' and password = '"+password+"' and type='admin') or (email= '"+nameOrEmail+"' and password = '"+password+"' and type='admin') ;";
 			ResultSet rs = st.executeQuery(sql);
+			Statement st2 = con.createStatement();
+			String sql2= "SELECT * FROM `utilisateur` WHERE (username= '"+nameOrEmail+"' and password = '"+password+"' and type='magasinier') or (email= '"+nameOrEmail+"' and password = '"+password+"' and type='magasinier') ;";
+			ResultSet rs2 = st2.executeQuery(sql2);
+			Statement st3 = con.createStatement();
+			String sql3= "SELECT * FROM `utilisateur` WHERE (username= '"+nameOrEmail+"' and password = '"+password+"' and type='vendeure') or (email= '"+nameOrEmail+"' and password = '"+password+"' and type='vendeure') ;";
+			ResultSet rs3 = st3.executeQuery(sql3);
 			if(rs.next()) {
 				infoBox("L'utilisateur "+nameOrEmail+" est bien Identifie","Success",null);
 //				Node source = (Node) event.getSource();
@@ -72,7 +78,11 @@ public class loginSystem implements Initializable{
 				stage.setScene(scene);
 				stage.show();
 				
-			}else {
+			}else if(rs2.next()) {
+				infoBox("L'utilisateur "+nameOrEmail+" est bien Identifie Comme Magasinier","Success",null);
+			}else if(rs3.next()) {
+				infoBox("L'utilisateur "+nameOrEmail+" est bien Identifie Comme Vendeur","Success",null);
+			}else{
 				infoBox("l'email ou la mots de passe il est incorrecte","Failed",null);
 			}
 			
