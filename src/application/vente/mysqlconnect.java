@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 	/**
 	 *
-	 * @author amir
+	 * @author 
 	 */
 	public class mysqlconnect {
 	    

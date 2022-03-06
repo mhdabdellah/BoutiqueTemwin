@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import application.client.client;
-import application.produit.produits;
 import application.vente.mysqlconnect;
 import application.vente.vente;
 import javafx.collections.ObservableList;
