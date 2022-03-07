@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 06 mars 2022 à 19:48
--- Version du serveur : 10.4.22-MariaDB
--- Version de PHP : 8.1.2
+-- Généré le : lun. 07 mars 2022 à 01:27
+-- Version du serveur : 10.4.19-MariaDB
+-- Version de PHP : 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `boutique_temwin`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `boutique`
+--
+
+CREATE TABLE `boutique` (
+  `id` int(11) NOT NULL,
+  `emplacemnt` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
+  `vendeur` int(11) NOT NULL,
+  `moughataa` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Déchargement des données de la table `boutique`
+--
+
+INSERT INTO `boutique` (`id`, `emplacemnt`, `vendeur`, `moughataa`) VALUES
+(1, 'dfd', 1, 'Ujdk'),
+(2, 'soukou', 1, 'tvz'),
+(3, 'ara', 2, 'arafat');
 
 -- --------------------------------------------------------
 
@@ -86,8 +108,8 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `code_produit`, `deseignation`, `quantite_pour_client`, `fournisseur`, `remise`, `prix`, `quantite`) VALUES
-(7, '2252512', 'ris', 2, 'alibaba', 22, 254, 999),
-(8, '221', 'kjdcn', 2, 'med', 252, 220, 2);
+(1, '4458', 'deluire', 55, 'alibaba', 47, 58, 9998),
+(2, '2252512', 'ris', 2, 'alibaba', 22, 254, 999);
 
 -- --------------------------------------------------------
 
@@ -108,7 +130,7 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `username`, `password`, `email`, `type`) VALUES
-(1, 'baba', '1234', 'hsdkh@dd.d', 'vender'),
+(1, 'Abdellahi', 'sidi1212', 'abdellahi@gmail.com', 'admin'),
 (3, 'sidi', '123456', 'sidi@gmail.com', 'vendeure'),
 (5, 'mohamed', 'sidi1212', 'mohamed@gmail.com', 'magasinier'),
 (7, 'hacen', 'admin', 'hacen@gmail.com', 'admin'),
@@ -117,9 +139,45 @@ INSERT INTO `utilisateur` (`id`, `username`, `password`, `email`, `type`) VALUES
 (10, 'ahmed', '1234', 'ahmed@gmail.com', 'magasinier'),
 (12, 'Anjnjmn', 'sidi1212', 'abdellahi@gmail.com', 'admin');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ventes`
+--
+
+CREATE TABLE `ventes` (
+  `id` int(11) NOT NULL,
+  `idclient` int(11) NOT NULL,
+  `idvendeur` int(11) NOT NULL,
+  `quantite_vendues` int(11) NOT NULL,
+  `produit` varchar(250) NOT NULL,
+  `datevente` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `ventes`
+--
+
+INSERT INTO `ventes` (`id`, `idclient`, `idvendeur`, `quantite_vendues`, `produit`, `datevente`) VALUES
+(2, 2, 1, 56, 'deluire', '22/02/2220'),
+(3, 2, 8, 25, 'rise', '22/2/2221');
+
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `boutique`
+--
+ALTER TABLE `boutique`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`id`,`nni`),
+  ADD KEY `idvendeur` (`idvendeur`);
 
 --
 -- Index pour la table `magazin`
@@ -131,7 +189,7 @@ ALTER TABLE `magazin`
 -- Index pour la table `produit`
 --
 ALTER TABLE `produit`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`,`deseignation`);
 
 --
 -- Index pour la table `utilisateur`
@@ -140,8 +198,28 @@ ALTER TABLE `utilisateur`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `ventes`
+--
+ALTER TABLE `ventes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idclient` (`idclient`),
+  ADD KEY `idvendeur` (`idvendeur`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `boutique`
+--
+ALTER TABLE `boutique`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `client`
+--
+ALTER TABLE `client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `magazin`
@@ -153,13 +231,36 @@ ALTER TABLE `magazin`
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT pour la table `ventes`
+--
+ALTER TABLE `ventes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `client`
+--
+ALTER TABLE `client`
+  ADD CONSTRAINT `client_ibfk_1` FOREIGN KEY (`idvendeur`) REFERENCES `utilisateur` (`id`);
+
+--
+-- Contraintes pour la table `ventes`
+--
+ALTER TABLE `ventes`
+  ADD CONSTRAINT `ventes_ibfk_1` FOREIGN KEY (`idclient`) REFERENCES `client` (`id`),
+  ADD CONSTRAINT `ventes_ibfk_2` FOREIGN KEY (`idvendeur`) REFERENCES `utilisateur` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

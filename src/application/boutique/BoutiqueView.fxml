@@ -41,7 +41,7 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="back" layoutX="663.0" layoutY="105.0" mnemonicParsing="false" onAction="#rBack" prefHeight="30.0" prefWidth="88.0" style="-fx-background-color: red; -fx-cursor: hand;" text="Retour" textFill="#222121">
+      <Button fx:id="back" layoutX="678.0" layoutY="105.0" mnemonicParsing="false" onAction="#rBack" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: red; -fx-cursor: hand;" text="Retour" textFill="#222121">
          <font>
             <Font size="14.0" />
          </font></Button>
