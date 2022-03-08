@@ -29,5 +29,10 @@
       </Label>
       <PasswordField fx:id="registerPassword" layoutX="207.0" layoutY="200.0" prefHeight="41.0" prefWidth="267.0" promptText="Mot de passe..." />
       <PasswordField fx:id="registerConfirmPassword" layoutX="207.0" layoutY="256.0" prefHeight="41.0" prefWidth="267.0" promptText="confirmer Mot de passe..." />
+      <Button layoutX="534.0" layoutY="23.0" mnemonicParsing="false" onAction="#backtologin" text="Login">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

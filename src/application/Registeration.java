@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,15 +10,24 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 
 
 public class Registeration implements Initializable{
+	
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	//Url de notre base
@@ -42,6 +52,16 @@ public class Registeration implements Initializable{
 	
 	@FXML
 	private PasswordField registerConfirmPassword;
+	
+	@FXML
+	private void backtologin(ActionEvent event) throws IOException{
+//    	infoBox("Affichage de la list des Produits","Success",null);
+    	root = FXMLLoader.load(getClass().getResource("login.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+    }
 	
 	@FXML
 	private void userRegisteration(ActionEvent event){

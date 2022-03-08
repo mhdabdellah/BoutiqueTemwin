@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -43,6 +44,16 @@ public class loginSystem implements Initializable{
 	private PasswordField loginPassword;
 	
 	Stage dashboardStage = new Stage();
+	
+	@FXML
+	private void register(ActionEvent event) throws IOException{
+//    	infoBox("Affichage de la list des Produits","Success",null);
+    	root = FXMLLoader.load(getClass().getResource("Register.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+    }
 	
 	
 	@FXML
