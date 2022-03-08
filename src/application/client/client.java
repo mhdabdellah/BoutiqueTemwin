@@ -1,24 +1,26 @@
 package application.client;
 
 public class client {
-	private int id ,idvendeur;
-    private String username, lastname, nni , qrcode;
+	private int id;
+    private String username, lastname, nni , qrcode,qrimage;
     
-    public client(int id,String username,String lastname,String nni,String qrcode,int idvendeur) {
+    public client(int id,String username,String lastname,String nni,String qrcode,String qrimage) {
     	this.id=id;
     	this.username=username;
     	this.lastname=lastname;
     	this.nni= nni;
     	this.qrcode= qrcode;
-    	this.idvendeur=idvendeur;
+    	this.qrimage = qrimage;
     }
     
-	public int getIdvendeur() {
-		return idvendeur;
+	public String getQrimage() {
+		return qrimage;
 	}
-	public void setIdvendeur(int idvendeur) {
-		this.idvendeur = idvendeur;
+
+	public void setQrimage(String qrimage) {
+		this.qrimage = qrimage;
 	}
+
 	public int getId() {
 		return id;
 	}

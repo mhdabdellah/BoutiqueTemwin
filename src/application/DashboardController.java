@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 
 
 
@@ -50,14 +51,19 @@ public class DashboardController implements Initializable{
 	    @FXML
 	    private void manageclients(ActionEvent event) throws IOException {
 //	    	infoBox("Affichage de la list des Utilisateurs","Success",null);
+	    	try {
 	    	root = FXMLLoader.load(getClass().getResource("clientDocument.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
+	    	}
+	    	catch(Exception e) {
+	    		infoBox("eroor "+e,"Failed",null);
+	    	}
 	    
 	    }
-	    
+	   
 	    @FXML
 		private void manageusers(ActionEvent event) throws IOException{
 //	    	infoBox("Affichage de la list des Utilisateurs","Success",null);
@@ -81,7 +87,7 @@ public class DashboardController implements Initializable{
 	    
 	    @FXML
 		private void manageproduits(ActionEvent event) throws IOException{
-//	    	infoBox("Affichage de la list des Produits","Success",null);
+//	    	infoBox("Affichage de la list des Produits ","Success",null);
 	    	root = FXMLLoader.load(getClass().getResource("produitDocument.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
@@ -93,10 +99,9 @@ public class DashboardController implements Initializable{
 //	    	infoBox("Affichage de la list des Produits","Success",null);
 	    	try {
 	    		
-	    	URL uri = new File("src/application/boutique/BoutiqueView.fxml").toURI().toURL();
-	    	root = FXMLLoader.load(uri);
-//	    	getClass().getResource("/BoutiqueTemwin/src/application/boutique/BoutiqueView.fxml")
-			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//	    	URL uri = new File("src/application/boutique/BoutiqueView.fxml").toURI().toURL();
+	    		root = FXMLLoader.load(getClass().getResource("BoutiqueView.fxml"));
+	    		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
