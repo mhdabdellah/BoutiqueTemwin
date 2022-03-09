@@ -37,6 +37,8 @@ public class loginSystem implements Initializable{
 	//mot de passe
 	static final String DB_PASSWORD = "";
 	
+	public static String role ;
+	
 	@FXML
 	private TextField loginNameOrEmail;
 	
@@ -77,6 +79,7 @@ public class loginSystem implements Initializable{
 			ResultSet rs3 = st3.executeQuery(sql3);
 			if(rs.next()) {
 				infoBox("L'utilisateur "+nameOrEmail+" est bien Identifie","Success",null);
+				this.role = "admin";
 //				Node source = (Node) event.getSource();
 //				dashboardStage = (Stage) source.getScene().getWindow();
 //				dashboardStage.close();
@@ -90,6 +93,7 @@ public class loginSystem implements Initializable{
 				stage.show();
 				
 			}else if(rs2.next()) {
+				this.role = "magasinier";
 				infoBox("L'utilisateur "+nameOrEmail+" est bien Identifie Comme Magasinier","Success",null);
 				root = FXMLLoader.load(getClass().getResource("DashboardMagasinier.fxml"));
 				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -98,6 +102,7 @@ public class loginSystem implements Initializable{
 				stage.show();
 			}else if(rs3.next()) {
 				infoBox("L'utilisateur "+nameOrEmail+" est bien Identifie Comme Vendeur","Success",null);
+				this.role = "vendeur";
 				root = FXMLLoader.load(getClass().getResource("DashboardBoutique.fxml"));
 				stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 				scene = new Scene(root);

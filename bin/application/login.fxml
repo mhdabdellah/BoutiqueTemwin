@@ -4,35 +4,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.loginSystem">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: lime; -fx-cursor: hand;" prefHeight="464.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.loginSystem">
    <children>
-      <Label prefHeight="62.0" prefWidth="718.0" style="-fx-background-color: indigo;" text="               Authentification" textAlignment="CENTER" textFill="#fefeff" wrapText="true">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <Label layoutX="73.0" layoutY="132.0" prefHeight="50.0" prefWidth="107.0" text="Nom ou Email   :">
+      <Label layoutX="73.0" layoutY="132.0" prefHeight="50.0" prefWidth="107.0" text="Nom ou Email   :"  textFill="black">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="73.0" layoutY="209.0" prefHeight="50.0" prefWidth="107.0" text="Mot de passe     :">
+      <Label layoutX="73.0" layoutY="209.0" prefHeight="50.0" prefWidth="107.0" text="Mot de passe     :" textFill="black">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <PasswordField fx:id="loginPassword" layoutX="248.0" layoutY="209.0" prefHeight="50.0" prefWidth="242.0" promptText="Mot de passe " />
-      <TextField fx:id="loginNameOrEmail" layoutX="248.0" layoutY="132.0" prefHeight="50.0" prefWidth="242.0" promptText="Nom ou Email" />
-      <Button id="loginButton" layoutX="304.0" layoutY="304.0" mnemonicParsing="false" onAction="#login" prefHeight="50.0" prefWidth="186.0" style="-fx-background-color: indigo;" text="Se Connecter" textFill="#fcf9f9">
+      <PasswordField fx:id="loginPassword" layoutX="248.0" layoutY="209.0" prefHeight="50.0" prefWidth="285.0" promptText="Mot de passe "  />
+      <TextField fx:id="loginNameOrEmail" layoutX="248.0" layoutY="132.0" prefHeight="50.0" prefWidth="285.0" promptText="Nom ou Email" />
+      <Button id="loginButton" layoutX="254.0" layoutY="294.0" mnemonicParsing="false" onAction="#login" prefHeight="50.0" prefWidth="186.0" style="-fx-background-color: yellow;" text="Se Connecter" textFill="black">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="605.0" layoutY="73.0" mnemonicParsing="false" onAction="#register" text="Enregistrer">
+      <Button layoutX="611.0" layoutY="1.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: red; -fx-cursor: hand;" prefHeight="95.0" prefWidth="107.0" text="Enregistrer">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
+      <ImageView fitHeight="116.0" fitWidth="616.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/csa.jpeg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

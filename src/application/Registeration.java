@@ -54,6 +54,15 @@ public class Registeration implements Initializable{
 	private PasswordField registerConfirmPassword;
 	
 	@FXML
+	public void clearFields() {
+		registerName.setText(null);
+		registerEmail.setText(null);
+		registerEtat.setText(null);
+		registerPassword.setText(null);
+		registerConfirmPassword.setText(null);
+	 }
+	
+	@FXML
 	private void backtologin(ActionEvent event) throws IOException{
 //    	infoBox("Affichage de la list des Produits","Success",null);
     	root = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -84,6 +93,7 @@ public class Registeration implements Initializable{
 				
 				if(st.executeUpdate(sql)!=0) {
 					infoBox("L'utilisateur "+nom+" est bien Enregistrer","Success",null);
+					clearFields();
 				}else {
 					infoBox("Problem d'insertion Repeter l'insertion s'il vous plait","Failed",null);
 				}

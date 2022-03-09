@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import application.vente.mysqlconnect;
 import application.vente.vente;
+import application.loginSystem;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -35,6 +36,7 @@ public class VenteController implements Initializable{
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	loginSystem user;
     
 
     @FXML
@@ -95,12 +97,23 @@ public class VenteController implements Initializable{
     
     @FXML
     private void rBack(ActionEvent event) throws IOException {///BoutiqueTemwin/src/application/Dashboard.fxml
-    	root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-    	
+    	if(user.role=="admin") {
+	    	root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+    	}else if (user.role=="magasinier") {
+    		root = FXMLLoader.load(getClass().getResource("DashboardMagasinier.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+    	}else {
+    		root = FXMLLoader.load(getClass().getResource("DashboardBoutique.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+    	}
     }
        
     ObservableList<vente> listM;

@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import application.produit.mysqlconnect;
 import application.produit.produits;
+import application.loginSystem;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -36,6 +37,7 @@ public class produitController implements Initializable {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	loginSystem user;
 
     @FXML
     private TableView<produits> table_produits;
@@ -107,11 +109,23 @@ public class produitController implements Initializable {
     
     @FXML
     private void rBack(ActionEvent event) throws IOException {
-    	root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+    	if(user.role=="admin") {
+	    	root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+    	}else if (user.role=="magasinier") {
+    		root = FXMLLoader.load(getClass().getResource("DashboardMagasinier.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+    	}else {
+    		root = FXMLLoader.load(getClass().getResource("DashboardBoutique.fxml"));
+			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+    	}
     	
     }
        
