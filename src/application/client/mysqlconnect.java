@@ -40,7 +40,7 @@ import javax.swing.JOptionPane;
 	            ResultSet rs = ps.executeQuery();
 	            
 	            while (rs.next()){   
-	                list.add(new client(Integer.parseInt(rs.getString("id")), rs.getString("username"), rs.getString("lastname"), rs.getString("nni"), rs.getString("qrcode"),Integer.parseInt(rs.getString("idvendeur"))));               
+	                list.add(new client(Integer.parseInt(rs.getString("id")), rs.getString("username"), rs.getString("lastname"), rs.getString("nni"), rs.getString("qrcode"),rs.getString("qrimage")));               
 	            }
 	        } catch (Exception e) {
 	        }

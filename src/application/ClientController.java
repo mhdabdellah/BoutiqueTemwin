@@ -5,33 +5,31 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 //import javax.imageio.ImageIO;
 
 //-------------------------------------
-import javafx.application.Application;
+//import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+//import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
+
 import java.io.ByteArrayOutputStream;
 //-------------------------------------
-import java.io.Console;
+//import java.io.Console;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import application.client.mysqlconnect;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +41,7 @@ import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+//import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -51,10 +49,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
+//import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
+//import javafx.stage.Stage;
 import application.client.*;
 
 
@@ -71,9 +70,6 @@ public class ClientController implements Initializable{
     @FXML
     private TableColumn<client, Integer> col_id;
     
-    @FXML
-    private TableColumn<client, Integer> col_idvendeur;
-
     @FXML
     private TableColumn<client, String> col_username;
 
@@ -100,10 +96,7 @@ public class ClientController implements Initializable{
         
     @FXML
     private TextField txt_id;
-    
-    @FXML
-    private TextField txt_idvendeur;
-    
+     
     @FXML
     private TextField filterField;
     
@@ -118,25 +111,42 @@ public class ClientController implements Initializable{
     private AnchorPane carte;
     
     @FXML
-    private TextField cartnom;
+    private Text cartnom;
     
     @FXML
-    private TextField cartprenom;
+    private Text cartprenom;
     
     @FXML
-    private TextField cartnni;
+    private Text cartnni;
+    
     
     @FXML
-    private TextField cartqrcode;
+    private Text cartid;
     
     @FXML
     private ImageView cartimage;
     
+   
+    public String generateQr(String nni) throws Exception {
+		
+		ByteArrayOutputStream out = QRCode.from(nni).to(ImageType.PNG).withSize(200, 200).stream();
+    	File f = new File("C:\\javafx-sdk\\mysqlConnector\\"+nni+".png");
+    	fos = new FileOutputStream(f);
+    	fos.write(out.toByteArray());
+    	fos.flush();
+    	URL uri =f.toURI().toURL();
+    	return uri.toString();
+    	
+    	
+		
+	}
+    
     @FXML
     private void imprimer(ActionEvent event) {
     	Printer printer = Printer.getDefaultPrinter();
-    	PageLayout pageLayout = printer.createPageLayout(Paper.A4,PageOrientation.PORTRAIT,Printer.MarginType.DEFAULT);
+    	PageLayout pageLayout = printer.createPageLayout(Paper.A6,PageOrientation.PORTRAIT,Printer.MarginType.DEFAULT);
     	PrinterJob job= PrinterJob.createPrinterJob();
+    	
     	if(job!= null) {
     		boolean success = job.printPage(carte);
     		if(success) {
@@ -173,32 +183,32 @@ public class ClientController implements Initializable{
     Connection conn =null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+	private FileOutputStream fos;
+	
+	
+	
     
      
     public void Add_users (){    
         conn = mysqlconnect.ConnectDb();
-        String sql = "insert into client(username,lastname,nni,qrcode,idvendeur) values(?,?,?,?,?)";
+        String sql = "insert into client(username,lastname,nni,qrcode,qrimage) values (?,?,?,?,?)";
         try {
-        	ByteArrayOutputStream out = QRCode.from(txt_nni.getText()).to(ImageType.PNG).withSize(200, 200).stream();
-        	File f = new File("C:\\javafx-sdk\\mysqlConnector\\"+txt_nni.getText()+".png");
-        	FileOutputStream fos = new FileOutputStream(f);
-        	fos.write(out.toByteArray());
-        	fos.flush();
             pst = conn.prepareStatement(sql);
             pst.setString(1, txt_username.getText());
             pst.setString(2, txt_lastname.getText());
             pst.setString(3, txt_nni.getText());
             pst.setString(4, txt_nni.getText());
-            pst.setString(5, txt_idvendeur.getText());
+            pst.setString(5,generateQr(txt_nni.getText()));
             pst.execute();
 
 //            JOptionPane.showMessageDialog(null, "Users Add succes");
             UpdateTable();
             search_user();
             clearFields();
-            infoBox("Le client est bien Ajouté","Success",null);
+            infoBox("Le client est bien Ajouté".toString(),"Success",null);
             
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
 //            JOptionPane.showMessageDialog(null, e);
         	infoBox("Le client n'est pas Ajouté par ce  que  "+e,"Failed",null);
         }
@@ -214,15 +224,29 @@ public class ClientController implements Initializable{
         return;
     }
     txt_id.setText(col_id.getCellData(index).toString());
+    cartid.setText("N°: "+col_id.getCellData(index).toString());
     txt_username.setText(col_username.getCellData(index).toString());
     txt_lastname.setText(col_lastname.getCellData(index).toString());
     txt_nni.setText(col_nni.getCellData(index).toString());
     txt_qrcode.setText(col_qrcode.getCellData(index).toString());
-    txt_idvendeur.setText(col_idvendeur.getCellData(index).toString());
     cartnom.setText(col_username.getCellData(index).toString());
     cartprenom.setText(col_lastname.getCellData(index).toString());
     cartnni.setText(col_nni.getCellData(index).toString());
-    cartqrcode.setText(col_qrcode.getCellData(index).toString());
+//    cartqrcode.setText(col_qrcode.getCellData(index).toString());
+    conn = mysqlconnect.ConnectDb();
+    String sql = "select qrimage from client where id ="+txt_id.getText();
+    PreparedStatement ps;
+	try {
+		ps = conn.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		 while (rs.next()) {
+	    Image im = new Image(rs.getString("qrimage"));
+	    cartimage.setImage(im);
+		 }
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		infoBox(""+txt_id.getText()+e,"Failed",null);	}
+
     
     }
 
@@ -234,9 +258,10 @@ public class ClientController implements Initializable{
             String value3 = txt_lastname.getText();
             String value4 = txt_nni.getText();
             String value5 = txt_qrcode.getText();
-            int value6 = Integer.parseInt(txt_idvendeur.getText().toString());
+            String value6 = generateQr(txt_nni.getText());
+            
             String sql = "update client set username= '"+value2+"',lastname= '"+
-                    value3+"',nni= '"+value4+"',qrcode= '"+value5+"',idvendeur= '"+value6+"' where id='"+value1+"' ";
+                    value3+"',nni= '"+value4+"',qrcode= '"+value5+"',qrimage= '"+value6+"'where id='"+value1+"'";
             pst= conn.prepareStatement(sql);
             pst.execute();
 //            JOptionPane.showMessageDialog(null, "Update");
@@ -278,7 +303,7 @@ public class ClientController implements Initializable{
         col_lastname.setCellValueFactory(new PropertyValueFactory<client,String>("lastname"));
         col_nni.setCellValueFactory(new PropertyValueFactory<client,String>("nni"));
         col_qrcode.setCellValueFactory(new PropertyValueFactory<client,String>("qrcode"));
-        col_idvendeur.setCellValueFactory(new PropertyValueFactory<client,Integer>("idvendeur"));
+       
         
         listM = mysqlconnect.getDatausers();
         table_users.setItems(listM);
@@ -294,7 +319,7 @@ public class ClientController implements Initializable{
         col_lastname.setCellValueFactory(new PropertyValueFactory<client,String>("lastname"));
         col_nni.setCellValueFactory(new PropertyValueFactory<client,String>("nni"));
         col_qrcode.setCellValueFactory(new PropertyValueFactory<client,String>("qrcode"));
-        col_idvendeur.setCellValueFactory(new PropertyValueFactory<client,Integer>("idvendeur"));
+        
         
         dataList = mysqlconnect.getDatausers();
         table_users.setItems(dataList);
@@ -316,9 +341,7 @@ public class ClientController implements Initializable{
     else if (String.valueOf(person.getQrcode()).indexOf(lowerCaseFilter)!=-1)
          return true;// Filter matches qrcode
                                 
-         else  if (String.valueOf(person.getIdvendeur()).indexOf(lowerCaseFilter)!=-1)
-                return true;// Filter matches idvendeur
-             else
+         else  
                   return false; // Does not match.
    });
   });  
